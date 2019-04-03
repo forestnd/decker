@@ -41,9 +41,7 @@ RUN dep ensure -v && make build_all && chmod a+x ./$APP_NAME
 
 RUN cp -r /go/src/github.com/stevenaldinger/decker/decker /go/bin/decker; \
 mkdir -p /go/bin/internal/app/decker/plugins; cp -r /go/src/github.com/stevenaldinger/decker/internal/app/decker/plugins /go/bin/internal/app/decker/plugins; \
-mkdir -p /go/bin/examples; cp -r /go/src/github.com/stevenaldinger/decker/examples /go/bin/examples
-
-# decker expects this to exist for the reports it generates
-RUN mkdir -p /tmp/reports
+mkdir -p /go/bin/examples; cp -r /go/src/github.com/stevenaldinger/decker/examples /go/bin/examples \
+&& mkdir -p /tmp/reports
 
 CMD ["decker"]
