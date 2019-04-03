@@ -48,4 +48,9 @@ COPY --from=builder /go/src/github.com/stevenaldinger/decker/examples /go/bin/ex
 # decker expects this to exist for the reports it generates
 # RUN mkdir -p /tmp/reports
 
+ENV PATH="$PATH:/go/bin"
+ENV PATH="$PATH:/usr/local/go/bin"
+
+
 CMD ["decker"]
+ENDPOINT ["sh"]
