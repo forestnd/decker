@@ -35,22 +35,15 @@ WORKDIR /go/src/github.com/stevenaldinger/$APP_NAME
 
 COPY . .
 
-RUN dep ensure -v \
- && make build_all \
- && chmod a+x ./$APP_NAME
+RUN dep ensure -v && make build_all && chmod a+x ./$APP_NAME
 
-FROM scratch as decker
+#FROM scratch as decker
 
-COPY --from=builder /go/src/github.com/stevenaldinger/decker/decker /go/bin/decker
-COPY --from=builder /go/src/github.com/stevenaldinger/decker/internal/app/decker/plugins /go/bin/internal/app/decker/plugins
-COPY --from=builder /go/src/github.com/stevenaldinger/decker/examples /go/bin/examples
+RUN cp -r /go/src/github.com/stevenaldinger/decker/decker /go/bin/decker; \
+mkdir -p /go/bin/internal/app/decker/plugins; cp -r /go/src/github.com/stevenaldinger/decker/internal/app/decker/plugins /go/bin/internal/app/decker/plugins; \
+mkdir -p /go/bin/examples; cp -r /go/src/github.com/stevenaldinger/decker/examples /go/bin/examples
 
 # decker expects this to exist for the reports it generates
-# RUN mkdir -p /tmp/reports
-
-ENV PATH="$PATH:/go/bin"
-ENV PATH="$PATH:/usr/local/go/bin"
-
+RUN mkdir -p /tmp/reports
 
 CMD ["decker"]
-ENDPOINT ["sh"]
