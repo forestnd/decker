@@ -23,6 +23,6 @@ output "host_address" {
   type = "string"
 }
 // port range "1"-"30000" - "open" or "closed"
-output "1-30000" {
+output "1-70000" {
   type = "string"
 }
