@@ -44,6 +44,11 @@ docker_build_kali:
 docker_build_minimal:
 	@docker build -f ./build/package/minimal.Dockerfile -t stevenaldinger/$(APP_NAME):minimal .
 
+docker_build_slime: docker_build_minimal
+	@docker build -f ./build/package/small.Dockerfile -t stevenaldinger/$(APP_NAME):slime .
+
+
+
 docker_build_and_push: docker_build_minimal docker_build_prod docker_build_kali
 	@docker tag stevenaldinger/$(APP_NAME):minimal stevenaldinger/$(APP_NAME):minimal-$(tag)
 	@docker tag stevenaldinger/$(APP_NAME):latest stevenaldinger/$(APP_NAME):base-$(tag)

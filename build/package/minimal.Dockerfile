@@ -37,11 +37,10 @@ COPY . .
 
 RUN dep ensure -v && make build_all && chmod a+x ./$APP_NAME
 
-#FROM scratch as decker
 
-RUN cp -r /go/src/github.com/stevenaldinger/decker/decker /go/bin/decker; \
-mkdir -p /go/bin/internal/app/decker/plugins; cp -r /go/src/github.com/stevenaldinger/decker/internal/app/decker/plugins /go/bin/internal/app/decker/plugins; \
-mkdir -p /go/bin/examples; cp -r /go/src/github.com/stevenaldinger/decker/examples /go/bin/examples \
-&& mkdir -p /tmp/reports
+RUN cp -r /go/src/github.com/stevenaldinger/decker/decker /go/bin/decker
+RUN cp -vr /go/src/github.com/stevenaldinger/decker/internal/ /go/bin/internal/
+RUN mkdir -p /go/bin/examples; cp -r /go/src/github.com/stevenaldinger/decker/examples /go/bin/examples
+RUN mkdir -p /tmp/reports
 
 CMD ["decker"]
