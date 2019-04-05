@@ -22,3 +22,8 @@
 /internal/app/decker/plugins-pro
 
 # stuff generated when project runs
+
+
+#Personal stuff and files
+run.sh
+/decker-reports/
