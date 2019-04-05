@@ -9,6 +9,7 @@ resource "nslookup" "nslookup" {
   plugin_enabled = "true"
   dns_server = "8.8.4.4"
 }
+
 resource "nmap" "nmap" {
   host = "${var.target_host}"
   plugin_enabled = "true"
@@ -18,6 +19,7 @@ resource "sslscan" "sslscan" {
   host = "${var.target_host}"
   plugin_enabled = "${nmap.443 == "open"}"
 }
+
 resource "sslyze" "sslyze" {
   host = "${var.target_host}"
   plugin_enabled = "${nmap.443 == "open"}"
